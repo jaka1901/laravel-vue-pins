@@ -2,9 +2,9 @@
     <main>
         <div class="columns-3 break-inside-avoid min-h-screen">
             <div v-for="pin, pinIndex in data" :key="pinIndex" class="w-full mb-6 border border-gray-400 p-3 inline-block bg-white rounded-md">
-                <contenteditable data-placeholder="Title" tag="div" class="font-bold" :contenteditable="true" v-model="editable[pinIndex].title" :no-nl="true" :no-html="true" @returned="submit(pinIndex)" />
-                <contenteditable data-placeholder="Description" tag="p" :contenteditable="true" v-model="editable[pinIndex].description" :no-nl="true" :no-html="true" @returned="submit(pinIndex)" />
-                <button v-if="pin.hasOwnProperty('id')" class="text-red-800 hover:text-red-300 py-0 rounded text-xs" @click="remove(pinIndex)">Delete</button>
+                <contenteditable data-placeholder="Title" tag="div" class="font-bold p-2" :contenteditable="true" v-model="editable[pinIndex].title" :no-nl="true" :no-html="true" @returned="submit(pinIndex)" />
+                <contenteditable data-placeholder="Description" tag="p" class="p-2" :contenteditable="true" v-model="editable[pinIndex].description" :no-nl="true" :no-html="true" @returned="submit(pinIndex)" />
+                <button v-if="pin.hasOwnProperty('id')" class="text-red-800 hover:text-red-300 p-2 rounded text-xs" @click="remove(pinIndex)">Delete</button>
             </div>
         </div>
     </main>

@@ -11,8 +11,7 @@
 </template>
 
 <script>
-import { Inertia } from '@inertiajs/inertia'
-import { ref, watch } from 'vue';
+import { ref } from 'vue';
 import contenteditable from 'vue-contenteditable';
 import { useForm } from '@inertiajs/inertia-vue3';
 

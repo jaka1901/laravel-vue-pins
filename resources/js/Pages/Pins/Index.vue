@@ -26,13 +26,12 @@
 </template>
 
 <script>
-import { ref, reactive } from 'vue'
+import { ref } from 'vue'
 import AppLayout from '@/Layouts/AppLayout.vue'
 import Card from './Components/Card.vue'
 
 export default {
     setup(props) {
-        const modalShow = ref(false)
         const newStatus = ref(false)
         const fetchPins = ref(props.pins)
 

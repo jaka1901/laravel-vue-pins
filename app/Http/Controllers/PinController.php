@@ -16,17 +16,10 @@ class PinController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Pins/Index');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $pins = Pin::orderBy('id','desc')->get();
+        return Inertia::render('Pins/Index', [
+            'pins' => $pins
+        ]);
     }
 
     /**
@@ -37,41 +30,27 @@ class PinController extends Controller
      */
     public function store(StorepinRequest $request)
     {
-        //
+        try{
+            $pins = new Pin;
+            $pins->title = $request->title;
+            $pins->description = $request->description;
+            $pins->user_id = \Auth::user()->id;
+            $pins->save();
+        }catch(\Exception $e){
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Pin  $Pin
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Pin $Pin)
+    public function update(UpdatepinRequest $request)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Pin  $Pin
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Pin $Pin)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdatepinRequest  $request
-     * @param  \App\Models\Pin  $Pin
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdatepinRequest $request, Pin $Pin)
-    {
-        //
+        try{
+            $pins = Pin::find($request->id);
+            $pins->title = $request->title;
+            $pins->description = $request->description;
+            $pins->save();
+        }catch(\Exception $e){
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
 
     /**
@@ -80,8 +59,12 @@ class PinController extends Controller
      * @param  \App\Models\Pin  $Pin
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Pin $Pin)
+    public function destroy($id)
     {
-        //
+        try{
+            Pin::find($id)->delete();
+        }catch(\Exception $e){
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
 }

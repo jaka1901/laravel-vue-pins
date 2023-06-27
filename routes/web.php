@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PinController;
-use App\Http\Controllers\PanelController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,21 +21,13 @@ Route::get('/', function () {
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
-    'verified',
 ])->group(function () {
 
     Route::name('pins.')->prefix('pins')->group(function(){
         Route::get('/', [PinController::class, 'index'])->name('index');
-        Route::post('/create', [PinController::class, 'create'])->name('create');
-        Route::post('/store', [PinController::class, 'store'])->name('create');
-        Route::post('/destroy', [PinController::class, 'destroy'])->name('destroy');
-    });
-
-    Route::name('panel.')->prefix('panel')->group(function(){
-        Route::get('/', [PanelController::class, 'index'])->name('index');
-        Route::post('/store', [PanelController::class, 'store'])->name('create');
-        Route::post('/update', [PanelController::class, 'update'])->name('update');
-        Route::post('/destroy', [PanelController::class, 'destroy'])->name('destroy');
+        Route::put('/update', [PinController::class, 'update'])->name('update');
+        Route::post('/store', [PinController::class, 'store'])->name('store');
+        Route::delete('/destroy/{id}', [PinController::class, 'destroy'])->name('destroy');
     });
 
 });

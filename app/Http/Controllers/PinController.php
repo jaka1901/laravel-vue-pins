@@ -16,7 +16,7 @@ class PinController extends Controller
      */
     public function index()
     {
-        $pins = Pin::orderBy('id','desc')->get();
+        $pins = Pin::secure()->orderBy('id','desc')->get();
         return Inertia::render('Pins/Index', [
             'pins' => $pins
         ]);

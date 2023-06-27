@@ -19,4 +19,7 @@ class Pin extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function scopeSecure($query){
+        return $query->where('user_id', \Auth::user()->id);
+    }
 }
